@@ -1,4 +1,9 @@
 body {
+  margin: 0;
+  min-height: 100vh;
+  height: 100%;
+  cursor: url(NormalSelect.cur), auto;
+  background-color: rgb(40, 40, 40);
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 

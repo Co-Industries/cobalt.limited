@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@kobalte/core": "^0.13.3",
+    "@solid-primitives/mouse": "^2.0.19",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.13.6",
     "@solidjs/start": "^1.0.2",
+    "motion": "^10.18.0",
     "solid-js": "^1.8.17",
     "vinxi": "^0.3.12"
   },

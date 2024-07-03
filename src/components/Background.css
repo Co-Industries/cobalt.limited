@@ -1,0 +1,39 @@
+.box {
+    position: absolute;
+    background-color: transparent;
+    height: 32px;
+    width: 32px;
+}
+
+.box::before,
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.box::before {
+    background: radial-gradient(50px circle at var(--mouse-x) var(--mouse-y), rgb(255, 255, 255), transparent 100%);
+    z-index: 1;
+  }
+  
+  .box::after {
+    background: radial-gradient(50px circle at var(--mouse-x) var(--mouse-y), rgba(70, 70, 70, 0.219), transparent 100%);
+    z-index: 3;
+  }
+
+  .box-content {
+  position: absolute;
+  inset: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background-color: rgb(40,40,40);
+  border-radius: inherit;
+  z-index: 2;
+  }
