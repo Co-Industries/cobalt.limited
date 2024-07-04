@@ -1,7 +1,22 @@
 import { createEffect, For } from "solid-js";
+import { createStore } from "solid-js/store";
 import { animate } from "motion";
 import { createMousePosition } from "@solid-primitives/mouse";
 import "./Background.css";
+
+interface Grid {
+  id: string;
+  gx: number;
+  gy: number;
+  x: number;
+  y: number;
+  timestamp: number;
+  cooldown: 1000;
+}
+
+const [gridStore, setGridStore] = createStore({
+  grid: [] as any,
+}); 
 
 const gridID = ["a", "b", "c"];
 let prevposX: number,
@@ -13,8 +28,10 @@ let prevposX: number,
 
 const createGridElement = (event: MouseEvent) => {
   const newGridElement = document.createElement("div");
-  const posX = Math.floor(event.x / 32) * 32;
-  const posY = Math.floor(event.y / 32) * 32;
+  const gridX = Math.floor(event.x / 32);
+  const gridY = Math.floor(event.y / 32);
+  const posX = gridX * 32;
+  const posY = gridY * 32;
   console.log(event.x, event.y);
   animate(
     newGridElement,
@@ -22,8 +39,23 @@ const createGridElement = (event: MouseEvent) => {
     { duration: 0 }
   );
   newGridElement.classList.add("grid-box");
+  newGridElement.id = "g" + gridStore.grid.length;
 
+  const newGridData: Grid = {
+    id: "g" + gridStore.grid.length,
+    gx: gridX,
+    gy: gridY,
+    x: posX,
+    y: posY,
+    timestamp: Date.now(),
+    cooldown: 1000
+  };
+
+  setGridStore("grid", (currentGrid) => [...currentGrid, newGridData])
   document.querySelector<HTMLElement>(".grid")!.appendChild(newGridElement);
+  animate("#" + newGridData.id, {scale: 0}, {duration: 1});
+
+  console.log(gridStore.grid);
 }
 
 export default function Background() {
@@ -58,7 +90,7 @@ export default function Background() {
         const rect = box.getBoundingClientRect();
         const relX = pos.x - rect.left;
         const relY = pos.y - rect.top;
-        box.style.setProperty("--mouse-x", `${relX}px`);
+        box.style.setProperty("--mouse-x", `${relX}px`); 
         box.style.setProperty("--mouse-y", `${relY}px`);
       }
     }
@@ -81,7 +113,6 @@ export default function Background() {
         </For>
       </div>
       <div class="grid">
-
       </div>
     </div>
   );

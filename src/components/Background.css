@@ -1,15 +1,15 @@
 .grid-box {
-    position: absolute;
-    background-color: rgb(255,255,255);
-    height: 32px;
-    width: 32px;
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  height: 32px;
+  width: 32px;
 }
 
 .cursor-box {
-    position: absolute;
-    background-color: transparent;
-    height: 32px;
-    width: 32px;
+  position: absolute;
+  background-color: transparent;
+  height: 32px;
+  width: 32px;
 }
 
 .cursor-box::before,
@@ -23,16 +23,24 @@
 }
 
 .cursor-box::before {
-    background: radial-gradient(30px circle at var(--mouse-x) var(--mouse-y), rgb(255, 255, 255), transparent 100%);
-    z-index: 1;
-  }
-  
-  .cursor-box::after {
-    background: radial-gradient(70px circle at var(--mouse-x) var(--mouse-y), rgba(43, 43, 43, 0.23), transparent 100%);
-    z-index: 3;
-  }
+  background: radial-gradient(
+    30px circle at var(--mouse-x) var(--mouse-y),
+    rgb(255, 255, 255),
+    transparent 100%
+  );
+  z-index: 1;
+}
 
-  .cursor-box-content {
+.cursor-box::after {
+  background: radial-gradient(
+    70px circle at var(--mouse-x) var(--mouse-y),
+    rgba(43, 43, 43, 0.23),
+    transparent 100%
+  );
+  z-index: 3;
+}
+
+.cursor-box-content {
   position: absolute;
   inset: 2px;
   display: flex;
@@ -40,7 +48,7 @@
   align-items: center;
   justify-content: center;
   padding: 18px;
-  background-color: rgb(40,40,40);
+  background-color: rgb(40, 40, 40);
   border-radius: inherit;
   z-index: 2;
-  }
+}
