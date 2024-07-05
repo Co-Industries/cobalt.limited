@@ -1,62 +1,103 @@
-import { createEffect, For } from "solid-js";
+import { createEffect, createSignal, onCleanup, For } from "solid-js";
 import { createStore } from "solid-js/store";
 import { animate } from "motion";
 import { createMousePosition } from "@solid-primitives/mouse";
 import "./Background.css";
 
-interface Grid {
+interface GridElement {
   id: string;
-  gx: number;
-  gy: number;
-  x: number;
-  y: number;
   timestamp: number;
-  cooldown: 1000;
+  duration: number;
+  active: boolean;
 }
 
-const [gridStore, setGridStore] = createStore({
-  grid: [] as any,
-}); 
+interface GridIndex {
+  [key: string]: number;
+}
+//
+//const [gridStore, setGridStore] = createStore({
+//  elements: [] as any
+//});
+//
+let gridElements = [] as GridElement[];
+let gridUnactiveElements = [] as number[];
+let gridIndex: GridIndex = {};
+
+const [runtime, updateRuntime] = createSignal(0),
+  timer = setInterval(() => updateRuntime(runtime() + 1), 1000);
+onCleanup(() => clearInterval(timer));
+
+createEffect(() => {
+  const event = runtime();
+  const time = Date.now();
+  for (let key in gridIndex) {
+    const index = gridIndex[key];
+    const gridElement = gridElements[index];
+    //console.log(index);
+    if (gridElement.active) {
+      if (time > gridElement.timestamp) {
+        gridElement.active = false;
+        animate(gridElement.id, { scale: 0 }, { duration: 1 });
+      }
+    } else {
+      gridUnactiveElements.push(index);
+      gridElement.active = true;
+      delete gridIndex[key];
+    }
+  }
+  //console.log(gridUnactiveElements);
+});
 
 const gridID = ["a", "b", "c"];
 let prevposX: number,
   prevposY: number,
+  gridX: number,
+  gridY: number,
   posX: number,
   posY: number,
   posXoffset: number,
   posYoffset: number;
 
 const createGridElement = (event: MouseEvent) => {
-  const newGridElement = document.createElement("div");
-  const gridX = Math.floor(event.x / 32);
-  const gridY = Math.floor(event.y / 32);
-  const posX = gridX * 32;
-  const posY = gridY * 32;
-  console.log(event.x, event.y);
-  animate(
-    newGridElement,
-    { x: posX, y: posY},
-    { duration: 0 }
-  );
-  newGridElement.classList.add("grid-box");
-  newGridElement.id = "g" + gridStore.grid.length;
+  gridX = Math.floor(event.x / 32);
+  gridY = Math.floor(event.y / 32);
 
-  const newGridData: Grid = {
-    id: "g" + gridStore.grid.length,
-    gx: gridX,
-    gy: gridY,
-    x: posX,
-    y: posY,
-    timestamp: Date.now(),
-    cooldown: 1000
-  };
+  const position = gridX + "-" + gridY;
+  if (gridIndex[position] != undefined) {
+    return;
+  }
 
-  setGridStore("grid", (currentGrid) => [...currentGrid, newGridData])
-  document.querySelector<HTMLElement>(".grid")!.appendChild(newGridElement);
-  animate("#" + newGridData.id, {scale: 0}, {duration: 1});
+  posX = gridX * 32;
+  posY = gridY * 32;
+  if (gridUnactiveElements.length == 0) {
+    const newGridElement = document.createElement("div");
+    animate(newGridElement, { x: posX, y: posY }, { duration: 0 });
+    newGridElement.classList.add("grid-box");
+    newGridElement.id = "g" + gridElements.length;
 
-  console.log(gridStore.grid);
-}
+    const newGridElementData: GridElement = {
+      id: "#g" + gridElements.length,
+      timestamp: Date.now(),
+      duration: 1000,
+      active: true,
+    };
+
+    gridIndex[position] = gridElements.length;
+    gridElements.push(newGridElementData);
+
+    document.querySelector<HTMLElement>(".grid")!.appendChild(newGridElement);
+
+    //animate("#" + newGridData.id, {scale: 0}, {duration: 1});
+    //console.log(gridIndex);
+  } else {
+    const gridElement = gridElements[gridUnactiveElements[0]];
+    animate(gridElement.id, { x: posX, y: posY, scale: 1 }, { duration: 0 });
+    const position = gridX + "-" + gridY;
+    gridIndex[position] = gridUnactiveElements[0];
+    gridUnactiveElements.shift();
+  }
+  //console.log(gridElements);
+};
 
 export default function Background() {
   const pos = createMousePosition();
@@ -90,7 +131,7 @@ export default function Background() {
         const rect = box.getBoundingClientRect();
         const relX = pos.x - rect.left;
         const relY = pos.y - rect.top;
-        box.style.setProperty("--mouse-x", `${relX}px`); 
+        box.style.setProperty("--mouse-x", `${relX}px`);
         box.style.setProperty("--mouse-y", `${relY}px`);
       }
     }
@@ -112,8 +153,7 @@ export default function Background() {
           )}
         </For>
       </div>
-      <div class="grid">
-      </div>
+      <div class="grid"></div>
     </div>
   );
 }
