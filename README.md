@@ -1,32 +1,14 @@
-# SolidStart
+# Cobalt Industries Ltd. *[Co Industries]* <img src="public/icons/sigil.svg" width="64px"/>
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a3af00c-2b95-4a54-92ce-35d124dadf9a/deploy-status)](https://app.netlify.com/sites/coindustries/deploys)
 
-## Creating a project
+A pioneering cybernetics company dedicated to advancing the integration of human biology with cutting-edge technology.
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+## Our Vision
+Driven by an insatiable ambition for control and superiority, our elite team of scientists, engineers, and strategists works incessantly to push the limits of technological innovation. Our alliances with top-tier research institutions, elite medical centers, and influential technology partners ensure that our advancements remain unparalleled and our dominion unchallenged.
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
+# Contributing
+We welcome collaboration and open-source contributions. If you are passionate about cybernetics and want to be a part of our journey, please reach out to us or contribute to our projects.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-Solid apps are built with _presets_, which optimise your project for deployment to different environments.
-
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
-
-## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
+---
+**Embrace the future under the aegis of Cobalt Industries Ltd. Welcome to the new era of human augmentation and control.**

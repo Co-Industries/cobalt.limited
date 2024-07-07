@@ -33,9 +33,6 @@ let gridActiveElements = [] as GridActiveElement[]; // ! Probably should use Set
 let checkedNeighbors = new Set<string>();
 let gridIndex: GridIndex = {};
 
-// ! ISSUE 1 [I1] The top row of the screen stays active, probably due to a problem with negative positions;
-
-
 let tickspeed = 1000;
 let tickspeedSeconds = tickspeed / 1000;
 
