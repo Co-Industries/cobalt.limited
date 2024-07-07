@@ -1,4 +1,4 @@
-# Cobalt Industries Ltd. *[Co Industries]* <img src="public/icons/sigil.svg" width="64px"/>
+#  <img src="public/icons/sigil.svg" width="32px"/> Cobalt Industries Ltd. *[Co Industries]*
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6a3af00c-2b95-4a54-92ce-35d124dadf9a/deploy-status)](https://app.netlify.com/sites/coindustries/deploys)
 
