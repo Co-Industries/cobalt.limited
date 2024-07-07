@@ -1,6 +1,6 @@
-# Cobalt Industries Ltd. *[Co Industries]*
+# Cobalt Industries Ltd. *[Co Industries]* <img src="public/icons/sigil.svg" width="20px"/>
 
-<img src="public/icons/sigil.svg" width="32px" style="filter:invert(); margin-right: 32px; margin-left: 32px"/> [![Netlify Status](https://api.netlify.com/api/v1/badges/6a3af00c-2b95-4a54-92ce-35d124dadf9a/deploy-status)](https://app.netlify.com/sites/coindustries/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a3af00c-2b95-4a54-92ce-35d124dadf9a/deploy-status)](https://app.netlify.com/sites/coindustries/deploys)
 
 A pioneering cybernetics company dedicated to advancing the integration of human biology with cutting-edge technology.
 
