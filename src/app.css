@@ -4,7 +4,7 @@ body {
   height: 100%;
   overflow: hidden;
   cursor: url(/icons/normalselect.cur), auto;
-  background-color: #282828;
+  background-color: rgb(8, 8, 8);
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 

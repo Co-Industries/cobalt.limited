@@ -35,6 +35,7 @@ let gridIndex: GridIndex = {};
 
 let tickspeed = 1000;
 let tickspeedSeconds = tickspeed / 1000;
+let gridSize = 16;
 
 const [runtime, updateRuntime] = createSignal(0),
   timer = setInterval(() => updateRuntime(runtime() + 1), tickspeed);
@@ -124,8 +125,8 @@ let prevpx: number,
 
 const activateGridElement = (gx: number, gy: number) => {
   const position = gx + "/" + gy;
-  px = gx * 32;
-  py = gy * 32;
+  px = gx * gridSize;
+  py = gy * gridSize;
 
   if (gridUnusedElements.length == 0) {
     const newGridElement = document.createElement("div");
@@ -156,16 +157,16 @@ const activateGridElement = (gx: number, gy: number) => {
 }
 
 const createGridElement = (pos: MousePositionInside) => {
-  gx = Math.floor(pos.x / 32);
-  gy = Math.floor(pos.y / 32);
+  gx = Math.floor(pos.x / gridSize);
+  gy = Math.floor(pos.y / gridSize);
 
   const position = gx + "/" + gy;
   if (gridIndex[position] != undefined) {
     return;
   }
 
-  px = gx * 32;
-  py = gy * 32;
+  px = gx * gridSize;
+  py = gy * gridSize;
   if (gridUnusedElements.length == 0 || runtime() == gridUnusedElementsTick[0]) {
     const newGridElement = document.createElement("div");
     animate(newGridElement, { x: px, y: py }, { duration: 0 });
@@ -197,8 +198,8 @@ export default function Background() {
   let mouseActive = false;
   createEffect(() => {
     if (mouseActive) createGridElement(pos);
-    px = Math.floor(pos.x / 32) * 32;
-    py = Math.floor(pos.y / 32) * 32;
+    px = Math.floor(pos.x / gridSize) * gridSize;
+    py = Math.floor(pos.y / gridSize) * gridSize;
     if (prevpx != px || prevpy != py) {
       animate(
         "#bb",
@@ -211,9 +212,9 @@ export default function Background() {
       animate(content, { opacity: [1, 0.4] }, { duration: 0.7 });
     }
     for (let x = -1; x < 2; x++) {
-      xoffset = x * 32;
+      xoffset = x * gridSize;
       for (let y = -1; y < 2; y++) {
-        yoffset = y * 32;
+        yoffset = y * gridSize;
         let ID = `#${gridID[x + 1]}${gridID[y + 1]}`;
         if (prevpx != px || prevpy != py) {
           animate(
