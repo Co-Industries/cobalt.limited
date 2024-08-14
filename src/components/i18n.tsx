@@ -12,17 +12,17 @@ const languages = ["en", "lv"]
 const languageFiles = [en, lv];
 
 export const changeLanguage = (newLanguage: string) => {
-  console.log(newLanguage);
+  //console.log(newLanguage);
   let index = languages.findIndex((value: string) => {return value == newLanguage});
   setCurrentLanguage(newLanguage);
   setLanguage({...languageFiles[index]});
   document.cookie = `language=${index.toString()}`;
-  console.log(language(), currentLanguage());
+  //console.log(language(), currentLanguage());
 };
 
 onMount(() => {
-  console.log(Number(document.cookie.charAt(document.cookie.length - 1)));
-  if (Number(document.cookie.charAt(document.cookie.length - 1)) < 0) {
+  let index = Number(document.cookie.charAt(document.cookie.length - 1));
+  if (index < 0 || isNaN(index)) {
       document.cookie = "language=0";
   }
   setTimeout(() => {
