@@ -21,7 +21,7 @@ export const changeLanguage = (newLanguage: string) => {
 };
 
 onMount(() => {
-  if (document.cookie == "") {
+  if (Number(document.cookie.charAt(document.cookie.length - 1)) < 0) {
       document.cookie = "language=0";
   }
   setTimeout(() => {
