@@ -31,11 +31,10 @@ export default function NavigationBar() {
       <>
       <div class="navigation-bar">
       <Link class="logo" href="https://cobalt.limited">
-      <img src="public/icons/logo.svg" style="margin: 16px; height: 36px"/>
+      <img src="/icons/logo.svg" style="margin: 16px; height: 36px"/>
       </Link>
       <NavigationMenu fitViewport onValueChange={updateMenuOrigin} class="navigation-menu__root" orientation={orientation()}>
       <NavigationMenu.Menu>
-      
           <NavigationMenu.Trigger class="navigation-menu__trigger">
             {language().NB1}{" "}
             <NavigationMenu.Icon class="navigation-menu__trigger-indicator">
@@ -49,7 +48,7 @@ export default function NavigationBar() {
                 href="https://cobalt.limited"
               >
                 <img
-                  src="public/icons/logo.svg"
+                  src="/icons/logo.svg"
                   role="presentation"
                   alt=""
                 />
