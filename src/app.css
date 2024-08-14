@@ -1,25 +1,62 @@
+@font-face {
+  font-family: "OCRAEXT";
+  src: url("/fonts/OCRAEXT.TTF") format("truetype-variations");
+  /* variable fonts support this: two values specifies a range */
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype-variations");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JosefinSans";
+  src: url("/fonts/JosefinSans-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BauhausStd";
+  src: url("/fonts/BauhausStd.ttf") format("truetype-variations");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   height: 100%;
   overflow: hidden;
-  cursor: url(/icons/normalselect.cur), auto;
+  cursor: url(/geometric-hand/NORMAL.png), default;
   background-color: rgb(8, 8, 8);
-  font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: OCRAEXT, Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-a {
-  margin-right: 1rem;
+button {
+  font-family: OCRAEXT, Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  cursor: url(/geometric-hand/LINKSELECT.png), pointer;
+}
+
+ul {
+  margin: 0px;
 }
 
 main {
   text-align: center;
   padding: 1em;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
 }
 
 h1 {
-  color: #335d92;
+  color: #0047ab;
   text-transform: uppercase;
   font-size: 4rem;
   font-weight: 100;
@@ -29,7 +66,10 @@ h1 {
 }
 
 p {
-  max-width: 14rem;
+  font-family: JosefinSans;
+  color: #ffffff;
+  width: 20rem;
+  max-width: 2rem;
   margin: 2rem auto;
   line-height: 1.35;
 }

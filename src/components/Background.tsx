@@ -1,9 +1,9 @@
-import { createEffect, createSignal, onCleanup, For } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createEffect, createSignal, onCleanup, onMount, For } from "solid-js";
 import { animate } from "motion";
 import {
   createMousePosition,
   MousePositionInside,
+  makeMouseInsideListener
 } from "@solid-primitives/mouse";
 import "./Background.css";
 
@@ -37,9 +37,15 @@ let tickspeed = 1000;
 let tickspeedSeconds = tickspeed / 1000;
 let gridSize = 16;
 
+let insideBackground: boolean;
+let prevInsideBackground: boolean;
+
 const [runtime, updateRuntime] = createSignal(0),
   timer = setInterval(() => updateRuntime(runtime() + 1), tickspeed);
-onCleanup(() => clearInterval(timer));
+
+  onMount(() => {
+  const listener = makeMouseInsideListener(document.querySelector<HTMLElement>(".background")!, inside => {insideBackground = inside}, { touch: true });
+});
 
 function checkNeighbors(position: string) {
   let neighborSize = checkedNeighbors.size;
@@ -198,8 +204,21 @@ export default function Background() {
   let mouseActive = false;
   createEffect(() => {
     if (mouseActive) createGridElement(pos);
+    const app = document.querySelector<HTMLElement>("#app")!;
+    app.style.setProperty("--x", `${pos.x}`);
+    app.style.setProperty("--y", `${pos.y}`);
+    app.style.setProperty("--xp", `${pos.x / window.innerWidth}`);
+    app.style.setProperty("--xy", `${pos.y / window.innerHeight}`);
+
+    if (prevInsideBackground != insideBackground)
+    {
+      animate(document.querySelector(".cursor")!, {opacity: +!!insideBackground}, {duration: 0.7}); // ? +!! some magic that change true / false to 1 or 0
+    }
+    prevInsideBackground = insideBackground;
+    
     px = Math.floor(pos.x / gridSize) * gridSize;
     py = Math.floor(pos.y / gridSize) * gridSize;
+    
     if (prevpx != px || prevpy != py) {
       animate(
         "#bb",
@@ -235,6 +254,7 @@ export default function Background() {
     prevpy = py;
   });
   return (
+    <>
     <div
       class="background"
       onclick={() => createGridElement(pos)}
@@ -256,5 +276,6 @@ export default function Background() {
       </div>
       <div class="grid"></div>
     </div>
+    </>
   );
 }

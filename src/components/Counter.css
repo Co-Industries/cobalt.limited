@@ -9,6 +9,8 @@
   outline: none;
   width: 200px;
   font-variant-numeric: tabular-nums;
+  pointer-events: auto;
+  cursor: url(/geometric-hand/LINKSELECT.png), pointer;
 }
 
 .increment:focus {

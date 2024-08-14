@@ -1,0 +1,144 @@
+.select__trigger {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4px 0 6px;
+    font-size: 18px;
+    line-height: 1;
+    height: 32px;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    color: #ffffff;
+    transition: border-color 250ms, color 250ms;
+    margin-bottom: 0px;
+  }
+  .select__trigger:hover {
+    border-color: hsl(240 5% 65%);
+  }
+  
+  /*
+  .select__trigger:focus-visible {
+    outline: 2px solid hsl(200 98% 39%);
+    outline-offset: 2px;
+  }
+*/
+  .select__trigger[data-invalid] {
+    border-color: hsl(0 72% 51%);
+    color: hsl(0 72% 51%);
+  }
+  .select__value {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .select__value[data-placeholder-shown] {
+    color: hsl(240 4% 46%);
+  }
+  .select__icon {
+    padding-left: 2px;
+    height: 16px;
+    width: 16px;
+    flex: 0 0 16px;
+    transition: transform 250ms ease;
+  }
+
+  .select__icon[data-expanded] {
+    transform: rotateX(180deg);
+  }
+
+  .select__description {
+    margin-top: 8px;
+    color: hsl(240 5% 26%);
+    font-size: 12px;
+    user-select: none;
+  }
+  .select__error-message {
+    margin-top: 8px;
+    color: hsl(0 72% 51%);
+    font-size: 12px;
+    user-select: none;
+  }
+  .select__content {
+    margin-top: 0px;
+    outline: none;
+    z-index: 3;
+    pointer-events: auto;
+    background-color: transparent;
+    /*box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.385), 0 2px 4px -2px rgba(255, 255, 255, 0.265);
+    */
+    transform-origin: var(--kb-select-content-transform-origin);
+    animation: contentHide 250ms ease-in forwards;
+  }
+  .select__content[data-expanded] {
+    animation: contentShow 250ms ease-out;
+  }
+  .select__listbox {
+    outline: none;
+    overflow-y: auto;
+    max-height: 360px;
+    padding: 0px;
+  }
+  
+  .select__item {
+    font-size: 16px;
+    line-height: 1;
+    color: hsl(0, 0%, 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding: 0 8px;
+    position: relative;
+    user-select: none;
+    outline: none;
+    cursor: url(/geometric-hand/LINKSELECT.png), pointer;
+  }
+  .select__item[data-disabled] {
+    color: hsl(240 5% 65%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .select__item[data-highlighted] {
+    outline: none;
+    background-color: rgb(0, 71, 171);
+  }
+  .select__section {
+    font-size: 14px;
+    line-height: 32px;
+    color: hsl(240 4% 46%);
+  }
+  .select__item-indicator {
+    padding-left: 2px;
+    margin-top: 2px;
+    font-size: 8px;
+    height: 16px;
+    width: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes contentShow {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes contentHide {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
